@@ -35,12 +35,26 @@ public class Prakt1_6
 				area=areaTriang(foot,height);
 				System.out.println("\nПлощадь треугольника - " + area);
 				break;
+				
+			//Практическое задание 1.3
+			case 3:
+				int chickens, cows, pigs,count;
+				System.out.println("\nВведите кол-во животных:");
+				System.out.println("\n Кол-во кур - ");
+				chickens=in.nextInt();
+				System.out.println("\n Кол-во коров - ");
+				cows=in.nextInt();
+				System.out.println("\n Кол-во свиней - ");
+				pigs=in.nextInt();
+				count=countLegs(chickens,cows,pigs);
+				System.out.println("\nОбщее кол-во ног в амбаре - " + count);
+				break;
 			default:
 				System.out.println("Задания, номер которого вы ввели, не существует");
 		}
 	}
 	
-	//Функция, выводящая остаток от деления параметров
+	//Метод, выводящий остаток от деления параметров
 	public static double remOfDiv (double divined, double divider)
 	{
 		double rem;
@@ -48,11 +62,19 @@ public class Prakt1_6
 		return rem;
 	}
 	
-	//Функция, выводящая площадь треугольника (по высоте и основанию)
+	//Метод, выводящий площадь треугольника (по высоте и основанию)
 	public static double areaTriang (double footing, double height)
 	{
 		double area;
 		area=(footing*height)/2;
 		return area;
+	}
+	
+	//Метод, подсчитывающий общее кол-во ног в амбаре
+	public static int countLegs(int chickens, int cows, int pigs)
+	{
+		int count;
+		count = chickens*2+cows*4+pigs*4;
+		return count;
 	}
 }
