@@ -114,9 +114,23 @@ public class Prakt1_6
 				sum=row(num);
 				System.out.println("\n Сумма ряда чисел вплоть до указанного числа - " + sum);
 				break;
+				
+			//Практическое задание 1.8
+			case 8:
+				int rib1,rib2;
+				System.out.println("\n Введите знасения двух рёбер:");
+				System.out.println("\n Длина первого ребра - ");
+				rib1=in.nextInt();
+				System.out.println("\n Длина второго ребра - ");
+				rib2=in.nextInt();
+				
+				int rib3;
+				rib3=rib(rib1,rib2);
+				System.out.println("\n Длина третьего ребра - " + rib3);
+				break;
 					
 			default:
-				System.out.println("Задания, номер которого вы ввели, не существует");
+				System.out.println(" Задания, номер которого вы ввели, не существует");
 		}
 	}
 	
@@ -223,5 +237,13 @@ public class Prakt1_6
 		}
 		
 		return sum;
+	}
+	
+	//Метод, возвращающий наибольшую возможную длину третьего ребра треуголника из расчёта двух данных
+	public static int rib(int rib1, int rib2)
+	{
+		int rib3;
+		rib3=rib1+rib2-1;
+		return rib3;
 	}
 }
