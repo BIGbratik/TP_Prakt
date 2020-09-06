@@ -94,6 +94,7 @@ public class Prakt1_6
 			//Практическое задание 1.6
 			case 6:
 				char chr;
+				
 				System.out.println("\n Введите символ (если введёте символ кириллицы, то получите кодировку utf-8):");
 				System.out.println("\n Ваш символ - ");
 				chr=in.next().charAt(0);
@@ -106,6 +107,7 @@ public class Prakt1_6
 			//Практическое задание 1.7
 			case 7:
 				int num;
+				
 				System.out.println("\n Введите число:");
 				System.out.println("\n Ваше число - ");
 				num=in.nextInt();
@@ -118,6 +120,7 @@ public class Prakt1_6
 			//Практическое задание 1.8
 			case 8:
 				int rib1,rib2;
+				
 				System.out.println("\n Введите знасения двух рёбер:");
 				System.out.println("\n Длина первого ребра - ");
 				rib1=in.nextInt();
@@ -127,6 +130,25 @@ public class Prakt1_6
 				int rib3;
 				rib3=rib(rib1,rib2);
 				System.out.println("\n Длина третьего ребра - " + rib3);
+				break;
+				
+			//Практическое задание 1.9
+			case 9:
+				int[] myArray;
+				int n;
+				
+				System.out.println("\n Введите длину массива :");
+				n=in.nextInt();
+				myArray=new int[n];
+				System.out.println("\n Вводите числа для массива :");
+				for(int i=0;i<n;i++)
+				{
+					myArray[i]=in.nextInt();
+				}
+				
+				int cubes;
+				cubes=amountOfCubes(myArray);
+				System.out.println("\n Сумма кубов чисел массива - "+cubes);
 				break;
 					
 			default:
@@ -245,5 +267,22 @@ public class Prakt1_6
 		int rib3;
 		rib3=rib1+rib2-1;
 		return rib3;
+	}
+
+	//Метод, принимающий на вход массив чисел и возвращающий сумму кубов чисел массива
+	public static int amountOfCubes(int[] array)
+	{
+		int cubes;
+		int n;
+		
+		cubes=0;
+		n=array.length;
+		
+		for (int i=0; i<n; i++)
+		{
+			cubes=cubes + (int)Math.pow(array[i],3);
+		}
+		
+		return cubes;
 	}
 }
