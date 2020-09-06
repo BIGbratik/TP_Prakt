@@ -1,7 +1,6 @@
 //Подключение класса для обеспечения ввода с клавиатуры
 import java.util.Scanner;
 
-
 public class Prakt1_6 
 {
 	public static void main(String[] args)
@@ -91,6 +90,18 @@ public class Prakt1_6
 				operation=operations(N, a, b);
 				System.out.println("\n Необхожимая операция - " + operation);
 				break;
+			
+			//Практическое задание 1.6
+			case 6:
+				char chr;
+				System.out.println("\n Введите символ (если введёте символ кириллицы, то получите кодировку utf-8):");
+				System.out.println("\n Ваш символ - ");
+				chr=in.next().charAt(0);
+				
+				int asc;
+				asc=ctoa(chr);
+				System.out.println("\n ASCII код символа - " + asc);
+				break;
 					
 			default:
 				System.out.println("Задания, номер которого вы ввели, не существует");
@@ -170,5 +181,13 @@ public class Prakt1_6
 			}
 		}
 		return oper;
+	}
+	
+	//Метод, приобразующий символ в его код ASCII
+	public static int ctoa(char chr)
+	{
+		int asc;
+		asc=(int)chr;
+		return asc;
 	}
 }
