@@ -102,6 +102,18 @@ public class Prakt1_6
 				asc=ctoa(chr);
 				System.out.println("\n ASCII код символа - " + asc);
 				break;
+				
+			//Практическое задание 1.7
+			case 7:
+				int num;
+				System.out.println("\n Введите число:");
+				System.out.println("\n Ваше число - ");
+				num=in.nextInt();
+					
+				int sum;
+				sum=row(num);
+				System.out.println("\n Сумма ряда чисел вплоть до указанного числа - " + sum);
+				break;
 					
 			default:
 				System.out.println("Задания, номер которого вы ввели, не существует");
@@ -189,5 +201,27 @@ public class Prakt1_6
 		int asc;
 		asc=(int)chr;
 		return asc;
+	}
+	
+	//Метод, возвращающий сумму чисел из ряда чисел вплоть до переданного парамметра, включая его
+	public static int row (int num)
+	{
+		int sum=0;
+		if (num>=0)
+		{
+			for (int i=1;i<=num;i++)
+			{
+				sum=sum+i;
+			}
+		}
+		else
+		{
+			for (int i=-1;i>=num;i--)
+			{
+				sum=sum+i;
+			}
+		}
+		
+		return sum;
 	}
 }
