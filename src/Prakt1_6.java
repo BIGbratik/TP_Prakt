@@ -150,6 +150,22 @@ public class Prakt1_6
 				cubes=amountOfCubes(myArray);
 				System.out.println("\n Сумма кубов чисел массива - "+cubes);
 				break;
+				
+			//Практическое задание 1.10
+			case 10:
+				int A,B,C;
+				System.out.println("\n Введите числа A, B, C:");
+				System.out.println("\n Число A - ");
+				A=in.nextInt();
+				System.out.println("\n Число B - ");
+				B=in.nextInt();
+				System.out.println("\n Число C - ");
+				C=in.nextInt();
+				
+				boolean res;
+				res=abcMath(A,B,C);
+				System.out.println("\n Результат проверки - "+res);
+				break;
 					
 			default:
 				System.out.println(" Задания, номер которого вы ввели, не существует");
@@ -285,4 +301,21 @@ public class Prakt1_6
 		
 		return cubes;
 	}
+
+	//Метод, принимающий три числа (A,B,C), суммирующий A с собой B раз, затем проверяющий, можно ли полученное число разделить на C
+	public static boolean abcMath (int A, int B, int C)
+	{
+		boolean res;
+		for (int i=0; i<B; i++)
+		{
+			A=A+A;
+		}
+		
+		if (A%C==0)
+			res=true;
+		else
+			res=false;
+		return res;
+	}
+
 }
