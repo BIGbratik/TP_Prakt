@@ -79,10 +79,22 @@ public class Prakt2_6
 				
 			//Практическое задание 2.5
 			case 5:
+				String numStr = new String();
+				
+				System.out.println("\n Введите число в виде строки (вводите с запятой !!!):");
+				in.nextLine();
+				numStr=in.nextLine();
+				
+				getDecimalPlaces(numStr);
 				break;
 			
 			//Практическое задание 2.6
 			case 6:
+				int num;
+				System.out.println("\n Введите число (целое !!!): ");
+				num=in.nextInt();
+				
+				Fibonacci(num);
 				break;
 				
 			//Практическое задание 2.7
@@ -184,4 +196,36 @@ public class Prakt2_6
 		}
 		System.out.println(Arrays.toString(mas));
 	}
+
+	//Метод, выводящий кол-во десятичных знаков после запятой в числе
+	public static void getDecimalPlaces(String num)
+	{
+		int decPls=0;
+			String[] numsPart = num.split(",");
+			decPls=numsPart[1].length();
+		System.out.println("\n Количество десятичных знаков после запятой в ведённом числе - "+decPls);
+	}
+
+	//Метод, выводящий число Фибоначи, соответствующее переданному порядковому номеру
+	public static void Fibonacci(int num)
+	{
+		int num0 = 0;
+		int num1 = 1;
+		int transit = 0;
+		if (num>0)
+		{
+			for (int i = 0; i < num; i++)
+			{
+				transit = num1;
+				num1 = num1 + num0;
+				num0 = transit;
+			}
+			System.out.println("\n Число фибоначи под номером " + num + " = " + num1);
+		}
+		else
+		{
+			System.out.println("\n Указанный порядковый номер ( " + num + " ) не может быть обработан ");
+		}
+	}
+
 }
