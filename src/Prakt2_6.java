@@ -99,10 +99,26 @@ public class Prakt2_6
 				
 			//Практическое задание 2.7
 			case 7:
+				String mailInd = new String();
+				
+				System.out.println("\n Введите почтовый индекс:");
+				in.nextLine();
+				mailInd=in.nextLine();
+				
+				isValid(mailInd);
 				break;
 				
 			//Практическое задание 2.8
 			case 8:
+				String str1 = new String();
+				String str2 = new String();
+				in.nextLine();				
+				System.out.print("\n Введите первое слово:");
+				str1=in.nextLine();
+				System.out.print("\n Введите второе слово:");
+				str2=in.nextLine();
+				
+				isStrangePair(str1,str2);
 				break;
 				
 			//Практическое задание 2.9
@@ -228,4 +244,45 @@ public class Prakt2_6
 		}
 	}
 
+	//Метод, определяющий правильность введённого почтового индекса
+	public static void isValid(String mailInd)
+	{
+		int n = mailInd.length();
+		char[] varifMailInd = mailInd.toCharArray();
+		boolean valid=true;
+		if (n==5)
+		{
+			for (int i = 0; i < n; i++)
+			{
+				if (((int)varifMailInd[i] < 48) || ((int)varifMailInd[i] > 57))
+				{
+					valid=false;
+					break;
+				}
+			}
+		}
+		else
+			valid=false;
+		System.out.println("\n Действивтельность переданного почтового индекса ( " + mailInd + " ): " + valid);
+	}
+
+	//Метод, определяющий явялется ли странной парой переданные строки
+	public static void isStrangePair(String str1, String str2)
+	{
+		int n1 = str1.length();
+		int n2 = str2.length();
+		boolean StrangePair;
+		if ((n1 >0) && (n2 > 0))
+		{
+			if ((str1.charAt(0)==str2.charAt(n2-1)) && (str1.charAt(n1-1) == str2.charAt(0)))
+				StrangePair=true;
+			else
+				StrangePair=false;
+		}
+		else if ((n1 == 0) && (n2 == 0))
+			StrangePair=true;
+		else
+			StrangePair=false;
+		System.out.println("\n Явдяются ли строки ( " + str1 + " , " + str2 + " ) странной парой? \n " + StrangePair);
+	}
 }
