@@ -171,7 +171,7 @@ public class Prakt1_6
 				System.out.println(" Задания, номер которого вы ввели, не существует");
 		}
 	}
-	
+
 	//Метод, выводящий остаток от деления параметров
 	public static double remOfDiv (double divined, double divider)
 	{

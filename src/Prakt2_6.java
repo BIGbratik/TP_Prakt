@@ -1,4 +1,5 @@
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Prakt2_6 
@@ -30,26 +31,50 @@ public class Prakt2_6
 		
 			//Практическое задание 2.2
 			case 2:
-				int n;
-				int[] arrayOfNums;
+				int n1;
+				int[] arrayOfNums1;
 				System.out.println("\n Введите число элементов в массиве для обработки:");
-				n=in.nextInt();
-				arrayOfNums=new int[n];
+				n1=in.nextInt();
+				arrayOfNums1=new int[n1];
 				System.out.println("Вводите числа для массива: ");
-				for (int i=0; i<n;i++)
+				for (int i=0; i<n1;i++)
 				{
-					arrayOfNums[i]=in.nextInt();
+					arrayOfNums1[i]=in.nextInt();
 				}
 				
-				differMaxMin(arrayOfNums);
+				differMaxMin(arrayOfNums1);
 				break;
 				
 			//Практическое задание 2.3
 			case 3:
+				int n2;
+				int[] arrayOfNums2;
+				System.out.println("\n Введите число элементов в массиве для обработки:");
+				n2=in.nextInt();
+				arrayOfNums2=new int[n2];
+				System.out.println("Вводите числа для массива: ");
+				for (int i=0; i<n2;i++)
+				{
+					arrayOfNums2[i]=in.nextInt();
+				}
+				
+				isAvgWhole(arrayOfNums2);
 				break;
 				
 			//Практическое задание 2.4
 			case 4:
+				int n3;
+				int[] arrayOfNums3;
+				System.out.println("\n Введите число элементов в массиве для обработки:");
+				n3=in.nextInt();
+				arrayOfNums3=new int[n3];
+				System.out.println("Вводите числа для массива: ");
+				for (int i=0; i<n3;i++)
+				{
+					arrayOfNums3[i]=in.nextInt();
+				}
+				
+				cumulativeSum(arrayOfNums3);
 				break;
 				
 			//Практическое задание 2.5
@@ -131,4 +156,32 @@ public class Prakt2_6
 		}
 	}
 	
+	//Метод, определяющий, является ли среднее значение массива целым числом
+	public static void isAvgWhole(int[] mas)
+	{
+		boolean isWhole;
+		int n = mas.length;
+		int sum = 0;
+		for(int i = 0; i < n; i++)
+		{
+			sum+=mas[i];
+		}
+		isWhole=(sum % n) == 0;
+		System.out.println(isWhole);
+	}
+	
+	//Метод, обрабатывающий введённый массив так, что каждый элемент тановится суммой предыдущих и его самого
+	public static void cumulativeSum(int[] mas)
+	{
+		int n = mas.length;
+		for (int i = n-1; i >= 0; i--)
+		{
+			for (int j = 0; j < i; j++)
+			{
+				mas[i]+=mas[j];
+				System.out.println(mas[i]);
+			}
+		}
+		System.out.println(Arrays.toString(mas));
+	}
 }
