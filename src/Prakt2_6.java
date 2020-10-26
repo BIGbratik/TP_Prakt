@@ -123,10 +123,48 @@ public class Prakt2_6
 				
 			//Практическое задание 2.9
 			case 9:
+				int arg;
+				String mainStr = new String();
+				String argStr = new String();
+				System.out.print("Что хотите узнать: \n 1 - Вхождение префиксного аргумента\n "
+						+ "2 - Вхождение суффиксного аргумента \n Введите выбраный номер: ");
+				arg=in.nextInt();
+				switch (arg)
+				{
+					case 1:
+						in.nextLine();				
+						System.out.print("\n Введите основное слово: ");
+						mainStr=in.nextLine();
+						System.out.print("\n Введите префиксный аргумент для поиска "
+								+ "(на конце не забудьте поставить '-'): ");
+						argStr=in.nextLine();
+						
+						isPrefix(mainStr,argStr);
+						break;
+						
+					case 2:
+						in.nextLine();				
+						System.out.print("\n Введите основное слово: ");
+						mainStr=in.nextLine();
+						System.out.print("\n Введите суффиксный аргумент для поиска"
+								+ " (в начале не забудьте поставить '-'): ");
+						argStr=in.nextLine();
+						
+						isSuffix(mainStr,argStr);
+						break;
+					default:
+						System.out.println("\n Введённый номер не действителен");
+						break;
+				}
 				break;
 				
 			//Практическое задание 2.10
 			case 10:
+				int step;
+				System.out.print("\n Введите номер шага: ");
+				step=in.nextInt();
+				
+				boxSeq(step);
 				break;
 					
 			default:
@@ -283,6 +321,49 @@ public class Prakt2_6
 			StrangePair=true;
 		else
 			StrangePair=false;
-		System.out.println("\n Явдяются ли строки ( " + str1 + " , " + str2 + " ) странной парой? \n " + StrangePair);
+		System.out.println("\n Явдяются ли строки ( " + str1 + " , " + str2 + 
+				" ) странной парой? \n " + StrangePair);
+	}
+
+	//Метод, определяющий, присутствует ли префикс в слове
+	public static void isPrefix(String mainStr, String argStr)
+	{
+		boolean prefix;
+		String[] clearArgStr = argStr.split("-");
+		if (mainStr.indexOf(clearArgStr[0]) == 0)
+			prefix = true;
+		else
+			prefix = false;
+		System.out.println(" Присутствует ли префикс ( " + argStr
+				+ " ) в слове ( " + mainStr + " )? \n " + prefix);
+	}
+
+	//Метод, определяющий, присутствует ли суффикс в слове
+	public static void isSuffix(String mainStr, String argStr)
+	{
+		boolean suffix;
+		String[] clearArgStr = argStr.split("-");
+		if (mainStr.indexOf(clearArgStr[1]) == (mainStr.length()-clearArgStr[1].length()))
+			suffix = true;
+		else
+			suffix = false;
+		System.out.println(" Присутствует ли суффикс ( " + argStr
+				+ " ) в слове ( " + mainStr + " )? \n " + suffix);
+	}
+
+	//Метод, определяющий какой кол-во полей будет закрашено на указанном шаге
+	public static void boxSeq(int step)
+	{
+		int box = 0;
+		if (step>=0)
+		{
+			if (step%2 == 1)
+				box=box + (step/2+1)*3 - (step - (step/2+1));
+			else
+				box = box + (step/2)*3 - (step/2);
+			System.out.print("\n Число закрашенных ячеек на шаге ( " + step + " ): " + box);
+		}
+		else if (step < 0)
+			System.out.println("\n Указанный номер шага невозможен !!!");
 	}
 }
