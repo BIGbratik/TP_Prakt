@@ -37,10 +37,21 @@ public class Prakt3_6
 				
 			//Практическое задание 3.3
 			case 3:
+				int perfectNum;
+				System.out.print("\n Введите ваше число: ");
+				perfectNum=in.nextInt();
+				in.nextLine();
+				
+				checkPerfect(perfectNum);
 				break;
 				
 			//Практическое задание 3.4
 			case 4:
+				String strFlip;
+				System.out.println("\n Введите вашу строку:");
+				strFlip=in.nextLine();
+				
+				flipEndChars(strFlip);
 				break;
 				
 			//Практическое задание 3.5
@@ -98,5 +109,38 @@ public class Prakt3_6
 		else
 			System.out.println("Индекс второго вхождения 'zip' в указанной строке: "
 					+indexZip2);
+	}
+	
+	//Метод, определяющий явлется ли число совершенным
+	public static void checkPerfect(int perfectNum)
+	{
+		int sum=0;
+		for (int i = 1; i < perfectNum; i++)
+		{
+			if (perfectNum % i == 0)
+				sum+=i;
+		}
+		System.out.println(" "+(sum==perfectNum));
+	}
+
+	//Метод, изменяющий первый и последний символы в строке
+	public static void flipEndChars(String strFlip)
+	{
+		if (strFlip.length()>1)
+		{
+			if (strFlip.charAt(0)!=strFlip.charAt(strFlip.length()-1))
+			{
+				System.out.println("\n"+strFlip.charAt(strFlip.length()-1)
+				+strFlip.substring(1, strFlip.length()-1)+strFlip.charAt(0));
+			}
+			else
+			{
+				System.out.println("\n Two's a pair!!!");
+			}
+		}
+		else
+		{
+			System.out.println("\n Incompatible!!!");
+		}
 	}
 }
