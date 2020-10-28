@@ -95,10 +95,23 @@ public class Prakt3_6
 				
 			//Практическое задание 3.9
 			case 9:
+				int simp;
+				System.out.print("Введите ваше число: ");
+				simp=in.nextInt();
+				in.nextLine();
+				
+				nextPrime(simp);
 				break;
 				
 			//Практическое задание 3.10
 			case 10:
+				int A,B,C;
+				System.out.println("Введите длины сторон:");
+				A=in.nextInt();
+				B=in.nextInt();
+				C=in.nextInt();
+				
+				rightTriangle(A,B,C);
 				break;
 					
 			default:
@@ -294,5 +307,62 @@ public class Prakt3_6
 		}
 		else
 			System.out.println("В переданной строке нет нулей");
+	}
+
+	//Метод, выводящий ближайшее простое число к введённому
+	public static void nextPrime(int simp)
+	{
+		int k=1;
+		if (simp>1)
+		{
+			for (int i=2; i<simp; i++)
+			{
+				if (simp%i==0)
+				{	
+					k=0;
+					break;
+				}
+			}	
+		}
+		if (k==1)
+		{
+			System.out.println("Ближайшее простое число: "+simp);
+		}
+		else
+		{
+			while (k!=1)
+			{
+				simp+=1;
+				for (int j=2; j<simp; j++)
+				{
+					if (simp%j==0)
+						break;
+					else if (j==(simp-1))
+						k+=1;
+				}
+			}
+			System.out.println("Ближайшее простое число: "+simp);
+		}
+		
+	}
+
+	//Метод, првоерка на прямоугольность треугольника
+	public static void rightTriangle(int A, int B, int C)
+	{
+		int gip=A;
+		int a=B,b=C,c;
+		if (a>gip)
+		{
+			c=gip;
+			gip=a;
+			a=c;
+		}
+		if (b>gip)
+		{
+			c=gip;
+			gip=b;
+			b=c;
+		}
+		System.out.println((Math.pow(a,2)+Math.pow(b,2))==Math.pow(gip, 2));
 	}
 }
