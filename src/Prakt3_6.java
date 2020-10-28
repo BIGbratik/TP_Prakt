@@ -56,10 +56,22 @@ public class Prakt3_6
 				
 			//Практическое задание 3.5
 			case 5:
-					break;
+				String str16X;
+				System.out.print("\n Введите выше 16-ричное число: ");
+				str16X=in.nextLine();
+				
+				isValidHexCode(str16X);
+				break;
 			
 			//Практическое задание 3.6
 			case 6:
+				String mas1, mas2;
+				System.out.println("Введите первый массив (элементы отделять только ',' и без пробелов!!!)");
+				mas1=in.nextLine();
+				System.out.println("Введите второй массив (элементы отделять только ',' и без пробелов!!!)");
+				mas2=in.nextLine();
+				
+				same(mas1, mas2);
 				break;
 				
 			//Практическое задание 3.7
@@ -142,5 +154,69 @@ public class Prakt3_6
 		{
 			System.out.println("\n Incompatible!!!");
 		}
+	}
+
+	//Метод, который определяет является ли 16х код действительным
+	public static void isValidHexCode(String str16X)
+	{
+		boolean isHex=true;
+		if ((str16X.length()==7)&&(str16X.charAt(0)=='#'))
+		{
+			for (int i = 1; i<str16X.length();i++)
+			{
+				if (((int)str16X.charAt(i)<48)
+					||(((int)str16X.charAt(i)>57)&&((int)str16X.charAt(i)<65))
+					||(((int)str16X.charAt(i)>70)&&((int)str16X.charAt(i)<97))
+					||((int)str16X.charAt(i)>102))
+				{
+					isHex=false;
+					break;
+				}
+			}
+		}
+		else
+		{
+			isHex=false;
+		}
+		System.out.println(" "+isHex);
+	}
+	
+	//Метод, сравнивающих кол-во уникальных элементов массива
+	public static void same(String mas1, String mas2)
+	{
+		int uniq1 = 1;
+		int uniq2 = 1;
+		int povtor = 0;
+		
+		String[] Mas1=mas1.split(",");
+		String[] Mas2=mas2.split(",");
+		
+		int n1 = Mas1.length;
+		int n2 = Mas2.length;
+		
+		for (int i = 1; i < n1; i++)
+		{
+			for (int j = 0; j < i; j++)
+			{
+				if (Mas1[j].equals(Mas1[i]))
+					povtor+=1;
+			}
+			if (povtor==0)
+				uniq1+=1;
+			povtor=0;
+		}
+		
+		for (int i = 1; i < n2; i++)
+		{
+			for (int j = 0; j < i; j++)
+			{
+				if (Mas2[j].equals(Mas2[i]))
+					povtor+=1;
+			}
+			if (povtor==0)
+				uniq2+=1;
+			povtor=0;
+		}
+		System.out.println(uniq1==uniq2);
 	}
 }
