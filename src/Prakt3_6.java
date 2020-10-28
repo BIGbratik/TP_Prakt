@@ -17,7 +17,7 @@ public class Prakt3_6
 			//Практическое задание 3.1
 			case 1:
 				int a,b,c;
-				System.out.println("\n Введите значения A, B, C:");
+				System.out.println("Введите значения A, B, C:");
 				a=in.nextInt();
 				b=in.nextInt();
 				c=in.nextInt();
@@ -29,7 +29,7 @@ public class Prakt3_6
 			//Практическое задание 3.2
 			case 2:
 				String strZip;
-				System.out.println("\n Введите строку:");
+				System.out.println("Введите строку:");
 				strZip=in.nextLine();
 				
 				findZip(strZip);
@@ -38,7 +38,7 @@ public class Prakt3_6
 			//Практическое задание 3.3
 			case 3:
 				int perfectNum;
-				System.out.print("\n Введите ваше число: ");
+				System.out.print("Введите ваше число: ");
 				perfectNum=in.nextInt();
 				in.nextLine();
 				
@@ -48,7 +48,7 @@ public class Prakt3_6
 			//Практическое задание 3.4
 			case 4:
 				String strFlip;
-				System.out.println("\n Введите вашу строку:");
+				System.out.println("Введите вашу строку:");
 				strFlip=in.nextLine();
 				
 				flipEndChars(strFlip);
@@ -57,7 +57,7 @@ public class Prakt3_6
 			//Практическое задание 3.5
 			case 5:
 				String str16X;
-				System.out.print("\n Введите выше 16-ричное число: ");
+				System.out.print("Введите выше 16-ричное число: ");
 				str16X=in.nextLine();
 				
 				isValidHexCode(str16X);
@@ -76,10 +76,21 @@ public class Prakt3_6
 				
 			//Практическое задание 3.7
 			case 7:
+				int num;
+				System.out.print("Введите ваше цело положительное число: ");
+				num=in.nextInt();
+				in.nextLine();
+				
+				isKaprekar(num);
 				break;
 				
 			//Практическое задание 3.8
 			case 8:
+				String zeroOnes;
+				System.out.println("Введите вашу строку нулей и единиц:");
+				zeroOnes=in.nextLine();
+				
+				longestZero(zeroOnes);
 				break;
 				
 			//Практическое задание 3.9
@@ -218,5 +229,70 @@ public class Prakt3_6
 			povtor=0;
 		}
 		System.out.println(uniq1==uniq2);
+	}
+
+	//Метод, поределяющий явялется ли переданное число число Каприкара
+	public static void isKaprekar(int num)
+	{
+		int numSqr=(int)Math.pow(num, 2);
+		String str = Integer.toString(numSqr);
+		int num1,num2,n;
+		n=str.length();
+		if (n%2==0)
+		{
+			num1 = Integer.parseInt(str.substring(0, n/2)); 
+			num2 = Integer.parseInt(str.substring(n/2, n));
+		}
+		else if ((n%2==1)&&(n>1))
+		{
+			num1 = Integer.parseInt(str.substring(0, n/2)); 
+			num2 = Integer.parseInt(str.substring(n/2, n));
+		}
+		else
+		{
+			num1 = 0;
+			num2 = numSqr;
+		}
+		System.out.println(num1+" "+num2+" "+numSqr);
+		System.out.println((num1+num2)==num);
+	}
+
+	//Метод, выводящий на экран самую длинную последовательность нулей из строки
+	public static void longestZero(String zeroOnes)
+	{
+		int k=0;
+		int kMax=0;
+		int n = zeroOnes.length();
+		for (int i = 0; i < n; i++)
+		{
+			if (zeroOnes.charAt(i)=='0')
+			{
+				if (k!=0)
+				{
+					k+=1;
+				}
+				else
+				{
+					k+=1;
+				}	
+			}
+			else
+			{
+				if (k>kMax)
+				{
+					kMax=k;
+				}
+				k=0;
+			}
+		}
+		if (kMax>0)
+		{
+			String str="";
+			for (int i=0; i<kMax; i++)
+				str=str +"0";
+			System.out.println(str);
+		}
+		else
+			System.out.println("В переданной строке нет нулей");
 	}
 }
