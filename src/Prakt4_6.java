@@ -122,11 +122,28 @@ public class Prakt4_6
 				
 			//Практическое задание 1.9
 			case 9:
-
+				String num1 = new String();
+				String num2 = new String();
+				in.nextLine();
+				System.out.print("Введите первое число для сравнения: ");
+				num1=in.nextLine();
+				System.out.print("Введите второе число для сравнения: ");
+				num2=in.nextLine();
+				
+				trouble(num1, num2);
 				break;
 				
 			//Практическое задание 1.10
 			case 10:
+				String books = new String();
+				char split;
+				in.nextLine();
+				System.out.print("Введите строку для поиска: ");
+				books=in.nextLine();
+				System.out.print("Введите разделительный символ: ");
+				split=in.nextLine().charAt(0);
+				
+				countUniqueBooks(books, split);
 				break;
 			default:
 				System.out.println(" Задания, номер которого вы ввели, не существует");
@@ -362,5 +379,52 @@ public class Prakt4_6
 			}
 		}
 		System.out.println(strSrav1.equals(strSrav2));
+	}
+
+	//Метод сравнения двух чисел
+	public static void trouble(String num1, String num2)
+	{
+		int[] digits1 = new int[10];
+		int[] digits2 = new int[10];
+		boolean isRepeat = false;
+		for (int i=0; i<num1.length();i++)
+			digits1[Integer.parseInt(num1.substring(i,i+1))]++;
+		for (int j=0; j<num2.length();j++)
+			digits2[Integer.parseInt(num2.substring(j,j+1))]++;
+		for (int k=0; k<10; k++)
+		{
+			if ((digits1[k]==3)&&(digits2[k]==2))
+			{
+				isRepeat=true;
+				break;
+			}
+		}
+		System.out.println(isRepeat);
+	}
+
+	//Метод поиска уникальных книг на полке между рахделительными символами
+	public static void countUniqueBooks(String books, char split)
+	{
+		String uniqBook =new String();
+		uniqBook ="";
+		boolean k = false;
+		
+		for (int i=0; i< books.length();i++)
+		{
+			if (books.charAt(i)==split)
+			{
+				k=!k;
+			}
+			else
+			{
+				if (k)
+				{
+					if (!uniqBook.contains(books.substring(i,i+1)))
+							uniqBook+=books.charAt(i);
+				}
+			}
+		}
+		System.out.println("Кол-ви книг в группах с указанными границами составляет - "+uniqBook.length()+" шт.");
+		
 	}
 }
