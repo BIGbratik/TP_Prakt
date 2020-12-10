@@ -40,12 +40,33 @@ public class Prakt4_6
 				
 			//Практическое задание 1.3
 			case 3:
+				int choseStyle=0;
+				System.out.print("Выберите в какой стиль будет преобразовываться строка (1 - змея; 2 - верблюд): ");
+				choseStyle=in.nextInt();
+				String name = new String();
+				System.out.print("Введите строку для обработки: ");
+				in.nextLine();
+				name=in.nextLine();
+				if (choseStyle==1)
+					toSnakeCase(name);
+				else
+					toCamelCase(name);
 
 				break;
 				
 			//Практическое задание 1.4
 			case 4:
-
+				double jobStart, jobStop, jobPay, jobPayKoef;
+				System.out.print("Введите начало рабочего дня - ");
+				jobStart = in.nextDouble();
+				System.out.print("Введите конец рабочего дня - ");
+				jobStop = in.nextDouble();
+				System.out.print("Введите ставку - ");
+				jobPay= in.nextDouble();
+				System.out.print("Введите коэффициент надбавки - ");
+				jobPayKoef = in.nextDouble();
+				
+				overTime(jobStart, jobStop, jobPay, jobPayKoef);
 				break;
 				
 			//Практическое задание 1.5
@@ -138,5 +159,64 @@ public class Prakt4_6
 				open=close;
 			}
 		}
+	}
+
+	//Метод перевода в Snake
+	public static void toSnakeCase (String str)
+	{
+		String strRes = new String();
+		strRes="";
+		int start = 0;
+		int stop = 0;
+		
+		for (int i=0; i<str.length();i++)
+		{
+			if (Character.isUpperCase(str.charAt(i)))
+			{
+				stop=i;
+				if (start==0)
+				{
+					strRes+=str.substring(start,stop);
+				}
+				else
+				{
+					strRes+="_"+Character.toLowerCase(str.charAt(start))+str.substring(start+1,stop);
+				}
+			}
+			start=stop;
+		}
+		if (start != 0) 
+			strRes += "_"+Character.toLowerCase(str.charAt(start)) + str.substring(start + 1);
+		System.out.println("Результат: "+strRes);
+		
+	}
+	
+	//Метод перевода в Camel
+	public static void toCamelCase(String str)
+	{
+		String[] strSplit = str.split("_");
+		String strRes = new String();
+		strRes=strSplit[0];
+		
+		for (int i=1; i<strSplit.length;i++)
+		{
+			strRes+=strSplit[i].substring(0,1).toUpperCase()+strSplit[i].substring(1);
+		}
+		System.out.print("Результат: "+strRes);
+	}
+
+	//Метод рассчёта з.п. сотрудника за день
+	public static void overTime(double Start, double Stop, double Pay, double Koef)
+	{
+		double pay = 0;
+		
+		if ((Start<17)&&(Stop<=17))
+			pay+=(Stop-Start)*Pay;
+		else if ((Start>17)&&(Stop>17))
+			pay+=(Stop-Start)*Pay*Koef;
+		else
+			pay+=(17-Start)*Pay+(Stop-17)*Pay*Koef;
+		System.out.println("Заработок за день составил: "+(int)pay+"."+(int)(Math.round((pay%1)*100))+"$");
+		
 	}
 }
