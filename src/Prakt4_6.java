@@ -97,11 +97,26 @@ public class Prakt4_6
 				
 			//Практическое задание 1.7
 			case 7:
+				String starStr = new String();
+				in.nextLine();
+				System.out.print("Введите строку для обработки: ");
+				starStr=in.nextLine();
+				
+				toStarShorthand(starStr);
 
 				break;
 				
 			//Практическое задание 1.8
 			case 8:
+				String str1 = new String();
+				String str2 = new String();
+				in.nextLine();
+				System.out.print("Введите первую строку для сравнения: ");
+				str1=in.nextLine();
+				System.out.print("Введите вторую строку для сравнения: ");
+				str2=in.nextLine();
+				
+				doesRhyme(str1,str2);
 
 				break;
 				
@@ -288,5 +303,64 @@ public class Prakt4_6
 			k+=1;
 		}
 		System.out.println("Мультиплекативное постоянство введённого числа - "+k);
+	}
+
+	//Метод замены повторяющихся эл-в строки на умножение на их кол-во
+	public static void toStarShorthand(String str)
+	{
+		String strRes = new String();
+		int k=1;
+		char lastChr=str.charAt(0);
+		for (int i = 1; i<str.length();i++)
+		{
+			if (str.charAt(i)!=lastChr)
+			{
+				if (k>1)
+					strRes+=lastChr + "*"+k;
+				else
+					strRes+=lastChr;
+				k=1;
+				lastChr=str.charAt(i);
+			}
+			else
+				k+=1;
+			if (i==str.length()-1)
+			{
+				if (k>1)
+					strRes+=lastChr + "*"+k;
+				else
+					strRes+=lastChr;
+			}
+		}
+		System.out.println("Обработанная строка - "+strRes);
+	}
+
+	//Метод сравнения рифмы
+	public static void doesRhyme(String str1,String str2)
+	{
+		String last1 = new String();
+		String last2 = new String();
+		
+		last1 = str1.substring(str1.lastIndexOf(" ")+1).toLowerCase();
+		last2 = str2.substring(str2.lastIndexOf(" ")+1).toLowerCase();
+		
+		String strSrav1 = new String();
+		String strSrav2 = new String();
+		
+		for (int i=0; i<last1.length();i++)
+		{
+			if ("aeuioy".contains(last1.substring(i,i+1)))
+			{
+				strSrav1+=last1.charAt(i);
+			}
+		}
+		for (int j=0; j<last2.length();j++)
+		{
+			if ("aeuioy".contains(last2.substring(j,j+1)))
+			{
+				strSrav2+=last2.charAt(j);
+			}
+		}
+		System.out.println(strSrav1.equals(strSrav2));
 	}
 }
