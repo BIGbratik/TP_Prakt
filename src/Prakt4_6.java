@@ -71,11 +71,27 @@ public class Prakt4_6
 				
 			//Практическое задание 1.5
 			case 5:
+				String weight=new String();
+				String height = new String();
+				
+				in.nextLine();
+				System.out.println("Далее введите вес и рост (число + пробел + код меры измерения). Числа вводите с точкой. \nТип данных обозначить одной буквой (кг - k, фунты - p, метры - m, дюймы - i)");
+				System.out.print("Вес - ");
+				weight=in.nextLine();
+				System.out.print("Рост - ");
+				height=in.nextLine();
+				
+				BMI(weight,height);
 
 				break;
 			
 			//Практическое задание 1.6
 			case 6:
+				int num;
+				System.out.print("Введите число - ");
+				num=in.nextInt();
+				
+				bugger(num);
 
 				break;
 				
@@ -218,5 +234,59 @@ public class Prakt4_6
 			pay+=(17-Start)*Pay+(Stop-17)*Pay*Koef;
 		System.out.println("Заработок за день составил: "+(int)pay+"."+(int)(Math.round((pay%1)*100))+"$");
 		
+	}
+
+	//Метод рассчёта индекса массы тела
+	public static void BMI(String weight, String height)
+	{
+
+		double w=0,h=0;
+		String[] strW=weight.split(" ");
+		String[] strH=height.split(" ");
+		
+		if (strW[1].equals("k"))
+			w=Double.parseDouble(strW[0]);
+		else if (strW[1].equals("p"))
+			w=Double.parseDouble(strW[0])*0.45;
+		
+		if (strH[1].equals("m"))
+			h=Double.parseDouble(strH[0]);
+		else if (strH[1].equals("i"))
+			h=Double.parseDouble(strH[0])*0.025;
+		
+		double index = w/(h*h);
+		
+		if (index<18.5)
+		{
+			System.out.println("Индекс массы тела - "+index + " (недостаточная масса тела)");
+		}
+		else if (index <25)
+		{
+			System.out.println("Индекс массы тела - "+index + " (нормальная масса тела)");
+		}
+		else
+		{
+			System.out.println("Индекс массы тела - "+index + " (избыточная масса тела)");
+		}
+	}
+
+	//Метод нахождения мультиплекативного пстоянства числа
+	public static void bugger(int num)
+	{
+		int k=0;
+		int n,p;
+		while (num>9)
+		{
+			n=num;
+			p=1;
+			while (n>0)
+			{
+				p=p*(n%10);
+				n=n/10;
+			}
+			num=p;
+			k+=1;
+		}
+		System.out.println("Мультиплекативное постоянство введённого числа - "+k);
 	}
 }
