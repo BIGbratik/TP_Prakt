@@ -1,3 +1,6 @@
+import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
 import java.util.Scanner;
 
 public class Prakt5_6 
@@ -102,10 +105,21 @@ public class Prakt5_6
 					
 				//Практическое задание 5.7
 				case 7:
+					int num;
+					System.out.print("Введите целое положительное число от 0 до 999: ");
+					num=in.nextInt();
+					
+					numToLang(num);
 					break;
 					
 				//Практическое задание 5.8
 				case 8:
+					String str = new String();
+					in.nextLine();
+					System.out.print("Введите строку для хеширования: ");
+					str=in.nextLine();
+					
+					getSHA256Hash(str);
 					break;
 					
 				//Практическое задание 5.9
@@ -303,7 +317,7 @@ public class Prakt5_6
 		System.out.println("Результирующая строка слов: "+res);
 	}
 
-	//Метод валидации карты по средствал сравнения длины номера и теста Луна
+	//Метод производящий валидацию карты по средствал сравнения длины номера и теста Луна
 	public static void validateCard(String num)
 	{
 		boolean res;
@@ -336,5 +350,242 @@ public class Prakt5_6
 			res=((10-(sum%10))==ctrl);
 		}
 		System.out.println("Результат: "+res);
+	}
+
+	//Метод преобразующий введённое число в его словесный аналог на английском и русском языках
+	public static void numToLang(int num)
+	{
+		String rus = new String();
+		String eng = new String();
+		
+		rus="";
+		eng="";
+		
+		if (num/100!=0)
+		{
+			switch (num/100) 
+			{
+				case 1:
+					rus+="сто ";
+					eng+="one hundred ";
+					break;
+				case 2:
+					rus+="двести ";
+					eng+="two hundred ";
+					break;
+				case 3:
+					rus+="триста ";
+					eng+="three hundred ";
+					break;
+				case 4:
+					rus+="четыреста ";
+					eng+="four hundred ";
+					break;
+				case 5:
+					rus+="пятьсот ";
+					eng+="five hundred ";
+					break;
+				case 6:
+					rus+="шестьсот ";
+					eng+="six hundred ";
+					break;
+				case 7:
+					rus+="семьсот ";
+					eng+="seven hundred ";
+					break;
+				case 8:
+					rus+="восемьсот ";
+					eng+="eight hundred ";
+					break;
+				case 9:
+					rus+="девятьсот ";
+					eng+="nine hundred ";
+					break;
+			}
+		}
+		switch ((num/10)%10) 
+		{
+			case 2:
+				rus+="двадцать ";
+				eng+="twenty ";
+				break;
+			case 3:
+				rus+="тридцать ";
+				eng+="thirty ";
+				break;
+			case 4:
+				rus+="сорок ";
+				eng+="forty ";
+				break;
+			case 5:
+				rus+="пятьдесят ";
+				eng+="fifty ";
+				break;
+			case 6:
+				rus+="шестьдесят ";
+				eng+="sixty ";
+				break;
+			case 7:
+				rus+="семьдесят ";
+				eng+="seventy ";
+				break;
+			case 8:
+				rus+="восемьдесят ";
+				eng+="eighty ";
+				break;
+			case 9:
+				rus+="девяносто ";
+				eng+="ninety ";
+				break;
+		}
+		
+		switch (num %10) 
+		{
+			case 0:
+				if ((num/10)%10==1)
+				{
+					rus+="десять";
+					eng+="ten";
+				}
+				else if (num==0)
+				{
+					rus+="ноль";
+					eng+="zero";
+				}
+				break;
+			case 1:
+				if ((num/10)%10==1)
+				{
+					rus+="одинадцать";
+					eng+="eleven";
+				}
+				else
+				{
+					rus+="один";
+					eng+="one";
+				}
+				break;
+			case 2:
+				if ((num/10)%10==1)
+				{
+					rus+="двенадцать";
+					eng+="twelve";
+				}
+				else
+				{
+					rus+="два";
+					eng+="two";
+				}
+				break;
+			case 3:
+				if ((num/10)%10==1)
+				{
+					rus+="тринадцать";
+					eng+="thiteen";
+				}
+				else
+				{
+					rus+="три";
+					eng+="three";
+				}
+				break;
+			case 4:
+				if ((num/10)%10==1)
+				{
+					rus+="четырнадцать";
+					eng+="fourteen";
+				}
+				else
+				{
+					rus+="четыре";
+					eng+="four";
+				}
+				break;
+			case 5:
+				if ((num/10)%10==1)
+				{
+					rus+="пятнадцать";
+					eng+="fifteen";
+				}
+				else
+				{
+					rus+="пять";
+					eng+="five";
+				}
+				break;
+			case 6:
+				if ((num/10)%10==1)
+				{
+					rus+="шестнадцать";
+					eng+="sixteen";
+				}
+				else
+				{
+					rus+="шесть";
+					eng+="six";
+				}
+				break;
+			case 7:
+				if ((num/10)%10==1)
+				{
+					rus+="семнадцать";
+					eng+="seventeen";
+				}
+				else
+				{
+					rus+="семь";
+					eng+="seven";
+				}
+				break;
+			case 8:
+				if ((num/10)%10==1)
+				{
+					rus+="восемнадцать";
+					eng+="eighteen";
+				}
+				else
+				{
+					rus+="восемь";
+					eng+="eight";
+				}
+				break;
+			case 9:
+				if ((num/10)%10==1)
+				{
+					rus+="девятнадцать";
+					eng+="nineteen";
+				}
+				else
+				{
+					rus+="девять ";
+					eng+="nine ";
+				}
+				break;
+		}
+		System.out.println("Название числа по русски - "+rus+"\nНазвание числа по английски - "+eng);
+	}
+
+	//Метод хеширования сообщения методом SHA256
+	public static void getSHA256Hash(String str)
+	{
+		byte[] byt=null;
+		try
+		{
+			MessageDigest msg = MessageDigest.getInstance("SHA-256");
+			byt=msg.digest(str.getBytes(StandardCharsets.UTF_8));
+		}
+		catch (Exception ex)
+		{
+			System.out.println("Уууупс, что-то пошло не так при хешировании");
+		}
+		
+		BigInteger num = new BigInteger (1,byt);
+		StringBuilder res = new StringBuilder(num.toString(16));
+		while (res.length()<32)
+		{
+			res.insert(0,'0');
+		}
+		
+		System.out.println(res);
 	}
 }
