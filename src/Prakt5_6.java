@@ -15,10 +15,46 @@ public class Prakt5_6
 			{
 				//Практическое задание 5.1
 				case 1:
+					int chc = 0;
+					System.out.print("Что необходимо выполнить (1 - декодировать; 2 - закодировать) ? - ");
+					chc=in.nextInt();
+					in.nextLine();
+					
+					switch (chc)
+					{
+						case 1:
+							String code = new String();
+							System.out.print("Введите массив-шифр целых чисел через пробел: ");
+							code=in.nextLine();
+							Decrypt(code);
+							break;
+						case 2:
+							String phrase = new String();
+							System.out.print("Введите фразу для зашифровывания: ");
+							phrase = in.nextLine();
+							Encrypt(phrase);
+							break;
+						default:
+							System.out.println("Введённый номер действия не соответствует запрашиваемому!!!");
+							break;
+					}
 					break;
 			
 				//Практическое задание 5.2
 				case 2:
+					String figure = new String();
+					String start = new String();
+					String finish = new String();
+					
+					in.nextLine();
+					System.out.print("Введите название фигуры: ");
+					figure = in.nextLine();
+					System.out.print("Введите старотовую пазицию: ");
+					start=in.nextLine();
+					System.out.print("Введите позицию назначения: ");
+					finish=in.nextLine();
+					
+					canMove(figure,start,finish);
 					break;
 					
 				//Практическое задание 5.3
@@ -63,5 +99,85 @@ public class Prakt5_6
 			}
 		}
 	}
+	
+	//Метод расшифровки сообщения, исходя из массива-шифра
+	public static void Decrypt(String mas)
+	{
+		String[] shifr = mas.split(" ");
+		
+		int firstChr = Integer.parseInt(shifr[0]);
+		
+		String phrase = new String();
+		phrase=""+((char)firstChr);
+		
+		if (shifr.length>1)
+		{
+			for (int i=1; i<shifr.length;i++)
+			{
+				firstChr=firstChr+Integer.parseInt(shifr[i]);
+				phrase+=(char)(firstChr);
+			}
+		}
+		System.out.print("Расшифрованная фраза: "+phrase);
+	}
+	
+	//Метод шифровки сообщения
+	public static void Encrypt(String msg)
+	{
+		String shifr = new String();
+		shifr="";
+		shifr+=(int)msg.charAt(0)+" ";
+		int firstChr=(int)msg.charAt(0);
+		int i=1;
+		while(i<msg.length())
+		{
+			shifr+=(((int)msg.charAt(i))-firstChr)+" ";
+			firstChr=(int)msg.charAt(i);
+			i++;
+		}
+		System.out.println("Шифр введённого сообщения: "+shifr);	
+	}
 
+	//Метод определения возможности хода шахматной фигуры
+	public static void canMove(String figure, String start, String finish)
+	{
+		figure=figure.toLowerCase();
+		start=start.toUpperCase();
+		finish=finish.toUpperCase();
+		int wordStart="ABCDEFGH".indexOf(start.charAt(0));
+		int wordFinish="ABCDEFGH".indexOf(finish.charAt(0));
+		int numStart=(int)start.charAt(1);
+		int numFinish=(int)finish.charAt(1);
+		
+		switch(figure)
+		{
+			case "пешка":
+				System.out.println(Math.abs(numFinish-numStart)==1);
+				break;
+			case "конь":
+				System.out.println(((Math.abs(wordFinish-wordStart)==2)&&(Math.abs(numFinish-numStart)==1))
+						||((Math.abs(wordFinish-wordStart)==1)&&(Math.abs(numFinish-numStart)==2)));
+				break;
+			case "слон":
+				System.out.println((Math.abs(wordFinish-wordStart)==(Math.abs(numFinish-numStart))));
+				break;
+			case "ладья":
+				System.out.println((wordStart==wordFinish)||(numStart==numFinish));
+				break;
+			case "ферзь":
+				System.out.println((wordStart==wordFinish)||(numStart==numFinish)
+						||(Math.abs(wordFinish-wordStart)==(Math.abs(numFinish-numFinish))));
+				break;
+			case "королева":
+				System.out.println((wordStart==wordFinish)||(numStart==numFinish)
+						||(Math.abs(wordFinish-wordStart)==(Math.abs(numFinish-numStart))));
+				break;
+			case "король":
+				System.out.println((Math.abs(numFinish-numStart)==1)||(Math.abs(wordFinish-wordStart)==1));
+				break;
+			default:
+				System.out.println("Введённое название фигуры не соответствует ни одному известному !!!");
+				break;
+		}
+	}
 }
