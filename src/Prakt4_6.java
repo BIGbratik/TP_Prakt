@@ -6,147 +6,155 @@ public class Prakt4_6
 	{
 		Scanner in = new Scanner(System.in);
 		
-		int choice;
-		System.out.println("\n Введите номер задания (от 1 до 10), которое хотите выполнить -");
-		choice=in.nextInt();
-		
-		switch (choice)
+		int choice=0;
+		while (choice!=-1)
 		{
-			//Практическое задание 1.1
-			case 1:
-				int n,k;
-				System.out.print("Введите кол-во слов в эссэ: ");
-				n=in.nextInt();
-				System.out.print("Введите кол-во символов в строке: ");
-				k=in.nextInt();
-				in.nextLine();
-				System.out.println("Введите строку для обработки: ");
-				String str = new String();
-				str=in.nextLine();
-				
-				Esse(n,k,str);
-				break;
-		
-			//Практическое задание 1.2
-			case 2:
-				String skobki = new String();
-				System.out.println("Введите строку скобок");
-				in.nextLine();
-				skobki=in.nextLine();
-				
-				split(skobki);
-
-				break;
-				
-			//Практическое задание 1.3
-			case 3:
-				int choseStyle=0;
-				System.out.print("Выберите в какой стиль будет преобразовываться строка (1 - змея; 2 - верблюд): ");
-				choseStyle=in.nextInt();
-				String name = new String();
-				System.out.print("Введите строку для обработки: ");
-				in.nextLine();
-				name=in.nextLine();
-				if (choseStyle==1)
-					toSnakeCase(name);
-				else
-					toCamelCase(name);
-
-				break;
-				
-			//Практическое задание 1.4
-			case 4:
-				double jobStart, jobStop, jobPay, jobPayKoef;
-				System.out.print("Введите начало рабочего дня - ");
-				jobStart = in.nextDouble();
-				System.out.print("Введите конец рабочего дня - ");
-				jobStop = in.nextDouble();
-				System.out.print("Введите ставку - ");
-				jobPay= in.nextDouble();
-				System.out.print("Введите коэффициент надбавки - ");
-				jobPayKoef = in.nextDouble();
-				
-				overTime(jobStart, jobStop, jobPay, jobPayKoef);
-				break;
-				
-			//Практическое задание 1.5
-			case 5:
-				String weight=new String();
-				String height = new String();
-				
-				in.nextLine();
-				System.out.println("Далее введите вес и рост (число + пробел + код меры измерения). Числа вводите с точкой. \nТип данных обозначить одной буквой (кг - k, фунты - p, метры - m, дюймы - i)");
-				System.out.print("Вес - ");
-				weight=in.nextLine();
-				System.out.print("Рост - ");
-				height=in.nextLine();
-				
-				BMI(weight,height);
-
-				break;
+			System.out.println("\n Введите номер задания (от 1 до 10), которое хотите выполнить -");
+			choice=in.nextInt();
 			
-			//Практическое задание 1.6
-			case 6:
-				int num;
-				System.out.print("Введите число - ");
-				num=in.nextInt();
+			switch (choice)
+			{
+				//Практическое задание 1.1
+				case 1:
+					int n,k;
+					System.out.print("Введите кол-во слов в эссэ: ");
+					n=in.nextInt();
+					System.out.print("Введите кол-во символов в строке: ");
+					k=in.nextInt();
+					in.nextLine();
+					System.out.println("Введите строку для обработки: ");
+					String str = new String();
+					str=in.nextLine();
+					
+					Esse(n,k,str);
+					break;
+			
+				//Практическое задание 1.2
+				case 2:
+					String skobki = new String();
+					System.out.println("Введите строку скобок");
+					in.nextLine();
+					skobki=in.nextLine();
+					
+					split(skobki);
+	
+					break;
+					
+				//Практическое задание 1.3
+				case 3:
+					int choseStyle=0;
+					System.out.print("Выберите в какой стиль будет преобразовываться строка (1 - змея; 2 - верблюд): ");
+					choseStyle=in.nextInt();
+					String name = new String();
+					System.out.print("Введите строку для обработки: ");
+					in.nextLine();
+					name=in.nextLine();
+					if (choseStyle==1)
+						toSnakeCase(name);
+					else
+						toCamelCase(name);
+	
+					break;
+					
+				//Практическое задание 1.4
+				case 4:
+					double jobStart, jobStop, jobPay, jobPayKoef;
+					System.out.print("Введите начало рабочего дня - ");
+					jobStart = in.nextDouble();
+					System.out.print("Введите конец рабочего дня - ");
+					jobStop = in.nextDouble();
+					System.out.print("Введите ставку - ");
+					jobPay= in.nextDouble();
+					System.out.print("Введите коэффициент надбавки - ");
+					jobPayKoef = in.nextDouble();
+					
+					overTime(jobStart, jobStop, jobPay, jobPayKoef);
+					break;
+					
+				//Практическое задание 1.5
+				case 5:
+					String weight=new String();
+					String height = new String();
+					
+					in.nextLine();
+					System.out.println("Далее введите вес и рост (число + пробел + код меры измерения). Числа вводите с точкой. \nТип данных обозначить одной буквой (кг - k, фунты - p, метры - m, дюймы - i)");
+					System.out.print("Вес - ");
+					weight=in.nextLine();
+					System.out.print("Рост - ");
+					height=in.nextLine();
+					
+					BMI(weight,height);
+	
+					break;
 				
-				bugger(num);
-
-				break;
-				
-			//Практическое задание 1.7
-			case 7:
-				String starStr = new String();
-				in.nextLine();
-				System.out.print("Введите строку для обработки: ");
-				starStr=in.nextLine();
-				
-				toStarShorthand(starStr);
-
-				break;
-				
-			//Практическое задание 1.8
-			case 8:
-				String str1 = new String();
-				String str2 = new String();
-				in.nextLine();
-				System.out.print("Введите первую строку для сравнения: ");
-				str1=in.nextLine();
-				System.out.print("Введите вторую строку для сравнения: ");
-				str2=in.nextLine();
-				
-				doesRhyme(str1,str2);
-
-				break;
-				
-			//Практическое задание 1.9
-			case 9:
-				String num1 = new String();
-				String num2 = new String();
-				in.nextLine();
-				System.out.print("Введите первое число для сравнения: ");
-				num1=in.nextLine();
-				System.out.print("Введите второе число для сравнения: ");
-				num2=in.nextLine();
-				
-				trouble(num1, num2);
-				break;
-				
-			//Практическое задание 1.10
-			case 10:
-				String books = new String();
-				char split;
-				in.nextLine();
-				System.out.print("Введите строку для поиска: ");
-				books=in.nextLine();
-				System.out.print("Введите разделительный символ: ");
-				split=in.nextLine().charAt(0);
-				
-				countUniqueBooks(books, split);
-				break;
-			default:
-				System.out.println(" Задания, номер которого вы ввели, не существует");
+				//Практическое задание 1.6
+				case 6:
+					int num;
+					System.out.print("Введите число - ");
+					num=in.nextInt();
+					
+					bugger(num);
+	
+					break;
+					
+				//Практическое задание 1.7
+				case 7:
+					String starStr = new String();
+					in.nextLine();
+					System.out.print("Введите строку для обработки: ");
+					starStr=in.nextLine();
+					
+					toStarShorthand(starStr);
+	
+					break;
+					
+				//Практическое задание 1.8
+				case 8:
+					String str1 = new String();
+					String str2 = new String();
+					in.nextLine();
+					System.out.print("Введите первую строку для сравнения: ");
+					str1=in.nextLine();
+					System.out.print("Введите вторую строку для сравнения: ");
+					str2=in.nextLine();
+					
+					doesRhyme(str1,str2);
+	
+					break;
+					
+				//Практическое задание 1.9
+				case 9:
+					String num1 = new String();
+					String num2 = new String();
+					in.nextLine();
+					System.out.print("Введите первое число для сравнения: ");
+					num1=in.nextLine();
+					System.out.print("Введите второе число для сравнения: ");
+					num2=in.nextLine();
+					
+					trouble(num1, num2);
+					break;
+					
+				//Практическое задание 1.10
+				case 10:
+					String books = new String();
+					char split;
+					in.nextLine();
+					System.out.print("Введите строку для поиска: ");
+					books=in.nextLine();
+					System.out.print("Введите разделительный символ: ");
+					split=in.nextLine().charAt(0);
+					
+					countUniqueBooks(books, split);
+					break;
+				//Выход и системы
+				case -1:
+					System.out.println("Завершение программы!!!");
+					break;
+				default:
+					System.out.println(" Задания, номер которого вы ввели, не существует");
+					break;
+			}
 		}
 	}
 	
