@@ -124,10 +124,21 @@ public class Prakt5_6
 					
 				//Практическое задание 5.9
 				case 9:
+					String title = new String();
+					
+					in.nextLine();
+					System.out.print("Введите строку из Игры Престолов - ");
+					title=in.nextLine();
+					correctTitle(title);
 					break;
 					
 				//Практическое задание 5.10
 				case 10:
+					int hex;
+					System.out.print("Введите число дял создания гексогональной решётки: ");
+					hex=in.nextInt();
+					
+					hexLaticce(hex);
 					break;
 				
 				//Завершение программы
@@ -587,5 +598,68 @@ public class Prakt5_6
 		}
 		
 		System.out.println(res);
+	}
+
+	/*Метод преобоазования тайтла из игры престолов таким образом, 
+	 * что каждое слов кроме предлгогов должно начинаться с большой буквы, а далее идти строчные. 
+	 * Предлоги полностью в строчном регистре*/
+	public static void correctTitle(String str)
+	{
+		str=str.toLowerCase();
+		String[] mas = str.split(" ");
+		String res=new String();
+		for (int i=0;i<mas.length;i++)
+		{
+			if (!(mas[i].contentEquals("and") || mas[i].contentEquals("of")
+					|| mas[i].contentEquals("the") || mas[i].contentEquals("in")))
+			{
+				mas[i]=mas[i].substring(0,1).toUpperCase()+mas[i].substring(1);
+			}
+			res+=mas[i]+" ";
+		}
+		System.out.println("Скорректированная строка: "+res);
+	}
+
+	//Метод, строящий, при возможности, гексогональную рештки с введённым кол-м эл-в
+	public static void hexLaticce(int num)
+	{
+		int countLines = 1;
+		boolean isHex=true;
+		while(3 * countLines * (countLines - 1) + 1 != num)
+		{
+			if (3 * countLines * (countLines - 1) + 1 > num)
+			{
+				System.out.println("По введённому числу невозможно построить решётку!!!");
+				isHex=false;
+				break;
+			}
+			countLines++;
+		}
+		if (isHex)
+		{
+			int lines = countLines * 2 - 1;
+			String res = "";
+			for (int i = 0; i < lines / 2; i++)
+			{
+				for (int j = 0; j < countLines - i; j++)
+					res += " ";
+				for (int cell = 0; cell < countLines + i; cell++)
+					res += "o ";
+				for (int j = 0; j < countLines - i -1; j++)
+					res += " ";
+				res += "\n";
+			}
+			for (int i = lines / 2; i < lines; i++)
+			{
+				for (int j = 0; j < countLines - (lines - i) + 1; j++)
+					res += " ";
+				for (int cell = 0; cell < countLines + (lines - i) - 1; cell++)
+					res += "o ";
+				for (int j = 0; j < countLines - (lines - i); j++)
+					res += " ";
+				res += "\n";
+			}
+			System.out.println(res);
+		}
 	}
 }
