@@ -83,10 +83,21 @@ public class Prakt5_6
 					
 				//Практическое задание 5.5
 				case 5:
+					String wordStr = new String();
+					in.nextLine();
+					System.out.print("Введите строку слов разделённых пробелом: ");
+					wordStr=in.nextLine();
+					
+					sameVowelGroup(wordStr);
 					break;
 				
 				//Практическое задание 5.6
 				case 6:
+					String cardNumber = new String();
+					in.nextLine();
+					System.out.print("Введите номер карты: ");
+					cardNumber=in.nextLine();
+					validateCard(cardNumber);
 					break;
 					
 				//Практическое задание 5.7
@@ -239,5 +250,91 @@ public class Prakt5_6
 			sum=res;
 		}
 		System.out.println("Результат: "+sum);
+	}
+
+	//Метод сравнивающий первое слово с остальными на предмет наличия в других словах тех же глассных, что и в первом
+	public static void sameVowelGroup(String str)
+	{
+		String[] wordMas=str.split(" ");
+		String res = new String();
+		res=""+wordMas[0]+" ";
+		String vowelWord="";
+		String vowelMas="";
+		
+		boolean triger=true;
+		
+		for (int i=0; i<wordMas[0].length();i++) 
+		{
+			if (("AEYUIO".contains(wordMas[0].substring(i,i+1).toUpperCase()))
+					&&(!vowelWord.contains(wordMas[0].substring(i,i+1).toUpperCase())))
+			{
+				vowelWord+=wordMas[0].substring(i,i+1).toUpperCase();
+			}
+		}
+		
+		if (wordMas.length>1)
+		{
+			for (int j=1; j<wordMas.length;j++)
+			{
+				for (int k=0; k<wordMas[j].length();k++) 
+				{
+					if (("AEYUIO".contains(wordMas[j].substring(k,k+1).toUpperCase()))
+							&&(!vowelMas.contains(wordMas[j].substring(k,k+1).toUpperCase())))
+					{
+						vowelMas+=wordMas[j].substring(k,k+1).toUpperCase();
+					}
+				}
+				
+				for (int l=0; l<vowelWord.length();l++)
+				{
+					if (!vowelMas.contains(vowelWord.substring(l,l+1)))
+					{
+						triger=false;
+						break;
+					}
+				}
+
+				if (triger)
+					res+=wordMas[j]+" ";
+				vowelMas="";
+				triger=true;
+			}
+		}
+		System.out.println("Результирующая строка слов: "+res);
+	}
+
+	//Метод валидации карты по средствал сравнения длины номера и теста Луна
+	public static void validateCard(String num)
+	{
+		boolean res;
+
+		int temp;
+		int sum=0;
+		if ((num.length()<14)&&(num.length()>19))
+		{
+			res=false;
+		}
+		else
+		{
+			int ctrl = Integer.parseInt(num.substring(num.length()-1,num.length()));
+			num=num.substring(0,num.length()-1);
+			System.out.println(num+" "+ctrl);
+			
+			for (int i=num.length()-1; i>=0;i--)
+			{
+				if (((num.length()-1)-(i-1))%2!=0)
+				{
+					temp=2*(int)num.charAt(i);
+					if (temp>9)
+						temp=temp/10+temp%10;
+					sum+=temp;
+				}
+				else
+					sum+=(int)num.charAt(i);
+			}
+			
+			res=((10-(sum%10))==ctrl);
+		}
+		System.out.println("Результат: "+res);
 	}
 }
