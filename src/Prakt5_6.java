@@ -59,10 +59,26 @@ public class Prakt5_6
 					
 				//Практическое задание 5.3
 				case 3:
+					String wordBefore = new String();
+					String wordRes=new String();
+					
+					in.nextLine();
+					System.out.print("Введите слово: ");
+					wordBefore=in.nextLine();
+					System.out.print("Введите желаемое слово: ");
+					wordRes=in.nextLine();
+					
+					canComplete(wordBefore,wordRes);
 					break;
 					
 				//Практическое задание 5.4
 				case 4:
+					String arrayNum = new String();
+					in.nextLine();
+					System.out.print("Введите целых чисел через пробел: ");
+					arrayNum=in.nextLine();
+					
+					sumDigProd(arrayNum);
 					break;
 					
 				//Практическое задание 5.5
@@ -179,5 +195,49 @@ public class Prakt5_6
 				System.out.println("Введённое название фигуры не соответствует ни одному известному !!!");
 				break;
 		}
+	}
+
+	//Метод проверки возможности составления второго слова из первого путём только добавления символов
+	public static void canComplete(String word, String res)
+	{
+		int wordSimil=0;
+		int resSimil=0;
+		
+		while((wordSimil<word.length())&&(resSimil<res.length()))
+		{
+			if (word.charAt(wordSimil)==res.charAt(resSimil))
+			{
+				wordSimil++;
+				resSimil++;
+			}
+			else
+				resSimil++;
+		}
+		System.out.println(wordSimil==word.length());
+	}
+
+	//Метод, который скалдывает числа и за тем умножает цифры до тех пор, пока не получится число из однйо цифры
+	public static void sumDigProd(String str)
+	{
+		String[] strMas=str.split(" ");
+		int sum=0;
+		int resTemp;
+		int res;
+		for (int i=0;i<strMas.length;i++)
+		{
+			sum+=Integer.parseInt(strMas[i]);
+		}
+		while(sum>9)
+		{
+			resTemp=sum;
+			res=1;
+			while(resTemp>0)
+			{
+				res=res*(resTemp%10);
+				resTemp=resTemp/10;
+			}
+			sum=res;
+		}
+		System.out.println("Результат: "+sum);
 	}
 }
