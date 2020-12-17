@@ -125,10 +125,20 @@ public class Prat6_6
 					
 				//Практическое задание 6.9
 				case 9:
+					String formula;
+					in.nextLine();
+					System.out.print("Введите формулу (без пробелов!!!!) - ");
+					formula=in.nextLine();
+					Formula(formula);
 					break;
 					
 				//Практическое задание 6.10
 				case 10:
+					String num;
+					in.nextLine();
+					System.out.print("Введите ваше число - ");
+					num=in.nextLine();
+					palindromedescendant(num);
 					break;
 				
 				//Завершение программы
@@ -499,6 +509,124 @@ public class Prat6_6
 	        else
 	        	return map.get(part) + convertToRoman(arab - part);
 		}
+	}
+
+	//Метод, производящий операции умножения и деления с выражением
+	public static double multiplication(String str)
+	{
+		double result = 1;
+		String currentNumber = "";
+		boolean multiplying = true;
+		for (int i = 0; i < str.length(); i++)
+		{
+			if ("*/".contains(str.substring(i,i+1)))
+			{
+				if (currentNumber.length() > 0)
+				{
+					if (multiplying) 
+						result *= Double.parseDouble(currentNumber);
+					else 
+						result /= Double.parseDouble(currentNumber);
+				}
+				
+				currentNumber = "";
+				
+				multiplying = (str.charAt(i) == '*');
+				
+			}
+			else
+			{
+				currentNumber += str.substring(i,i+1);
+			}
+		}
+		if (multiplying) 
+			result *= Double.parseDouble(currentNumber);
+		else 
+			result /= Double.parseDouble(currentNumber);
+		
+		return result;
+	}
+	
+	//Метод, выполняющий операции сложения и вычитания с выржением
+	public static double addition(String str)
+	{
+		double result = 0;
+		String currentNumber = "";
+		if (!"+-".contains(str.substring(0, 1)))
+			currentNumber = "+";
+		for (int i = 0; i < str.length(); i++)
+		{
+			if ("+-".contains(str.substring(i,i+1)))
+			{
+				if (currentNumber.length() > 0) 
+					result += multiplication(currentNumber);
+				currentNumber = str.substring(i,i+1);
+			}
+			else
+			{
+				currentNumber += str.substring(i,i+1);
+			}
+		}
+		result += multiplication(currentNumber);
+		return result;
+	}
+	//Метод, проверки тождественности формулы
+	public static void Formula(String formula)
+	{
+		String[] mas=formula.split("=");
+		double res;
+		boolean isIdentity=true;
+		
+		if (mas.length==0 || mas.length==1)
+		{
+			System.out.println("Это не формула, тут нет знаков (=)");
+		}
+		else
+		{
+			res = addition(mas[0]);
+			for (int i = 1; i < mas.length; i++)
+			{
+				if (res != addition(mas[i]))
+					isIdentity=false;
+			}
+			System.out.println(isIdentity);
+		}
+	}
+
+	//Метод, определёющий, является ли переданная строка палиндромом
+	public static boolean isPalindrom(String str)
+	{
+		boolean isPal=true;
+		for (int i=0; i<(str.length()/2);i++)
+		{
+			if (str.charAt(i)!=str.charAt(str.length()-1-i))
+			{
+				isPal=false;
+				break;
+			}
+		}
+		return isPal;
+	}
+	//Метод, определяющий является ли число, или его потомки, палиндромом
+	public static void palindromedescendant(String num)
+	{
+		String strNum="";
+		boolean find=false;
+		while (num.length()>1)
+		{
+			if (isPalindrom(num))
+			{
+				find=true;
+				break;
+			}
+			for (int i=0;i<num.length()-1;i+=2)
+			{
+				strNum+=(Integer.parseInt(num.substring(i,i+1))+Integer.parseInt(num.substring(i+1,i+2)));
+			}
+			num=strNum;
+			strNum="";
+		}
+		System.out.println(num+" "+find);
 	}
 }
 
