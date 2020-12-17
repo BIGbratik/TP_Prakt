@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -89,10 +90,19 @@ public class Prat6_6
 					
 				//Практическое задание 6.5
 				case 5:
+					String top;
+					in.nextLine();
+					System.out.print("Введите ваш отрывок из газеты - ");
+					top=in.nextLine();
+					getHashTags(top);
 					break;
 				
 				//Практическое задание 6.6
 				case 6:
+					int numUlam;
+					System.out.print("Введите порядковый номер числа из ряда чисел Улама - ");
+					numUlam=in.nextInt();
+					ulam(numUlam);
 					break;
 					
 				//Практическое задание 6.7
@@ -362,6 +372,73 @@ public class Prat6_6
 			System.out.println(str);
 		}
 	}
+
+	//Метод, находящий в стркое три самых длинных слова
+	public static void getHashTags(String top)
+	{
+		top=top.toLowerCase();
+		String[]mas = top.split("\\W");
+		String first = "";
+		String second = "";
+		String third = "";
+		for (int i = 0; i < mas.length; i++)
+		{
+			if (mas[i].length() > first.length())
+			{
+				third = second;
+				second = first;
+				first = mas[i];
+			}
+			else if (mas[i].length() > second.length())
+			{
+				third = second;
+				second = mas[i];
+			}
+			else if (mas[i].length() > third.length())
+				third = mas[i];
+		}
+		if (first.length() == 0)
+			System.out.println("Хештегов нет!!!");
+		else if (second.length() == 0) 
+			System.out.println("#"+first);
+		else if (third.length() == 0)
+			System.out.println("#"+first+" #"+second);
+		else
+			System.out.println("#"+first+" #"+second+" #"+third);
+	}
+
+	//Метод, выполняющий поиск n-го числа из радв числе Улама
+	public static void ulam(int n)
+	{
+		ArrayList<Integer>ULAM = new ArrayList<Integer>();
+		ULAM.add(1);
+		ULAM.add(2);
+		
+		int num = 2;
+		for (int i = 2; i < n; i++)
+		{
+			while (true)
+			{
+				num++;
+				int count = 0;
+				for (int j = 0; j < ULAM.size() - 1; j++)
+				{
+					for (int k = j + 1; k < ULAM.size(); k++)
+					{
+						if (ULAM.get(j) + ULAM.get(k) == num)
+							count++;
+					}
+				}
+				if (count == 1)
+				{
+					ULAM.add(num);
+					break;
+				}
+			}
+		}
+		System.out.println(ULAM.get(n-1));
+	}
+	
 }
 
 
