@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -107,10 +108,19 @@ public class Prat6_6
 					
 				//Практическое задание 6.7
 				case 7:
+					String str;
+					in.nextLine();
+					System.out.print("Введите последовательность символов - ");
+					str=in.nextLine();
+					longestNonrepeatingSubstring(str);
 					break;
 					
 				//Практическое задание 6.8
 				case 8:
+					int roman;
+					System.out.println("Введите число для преобразования - ");
+					roman=in.nextInt();
+					System.out.println(convertToRoman(roman));
 					break;
 					
 				//Практическое задание 6.9
@@ -438,7 +448,58 @@ public class Prat6_6
 		}
 		System.out.println(ULAM.get(n-1));
 	}
-	
+
+	//Метод, возвращающий самую длинную непосторяющуюся последовательность из строки символов
+	public static void longestNonrepeatingSubstring(String str)
+	{
+		String strRes="";
+		String strTemp="";
+		
+		for (int i=0;i<str.length();i++)
+		{
+			if (!strTemp.contains(str.substring(i,i+1)))
+				strTemp+=str.charAt(i);
+			else
+			{
+				if (strTemp.length()>strRes.length())
+					strRes=strTemp;
+				strTemp="";
+			}
+		}
+		if ((strTemp.length()!=0)&&(strRes.length()==0))
+			strRes=strTemp;
+		System.out.println(strRes);
+	}
+
+	//Метод, преобразующий арабское число в римское до 4000
+	public static String convertToRoman(int arab)
+	{
+		if (arab==0)
+			return "Не знаю как он выглядел, он это ноль";
+		else
+		{
+			TreeMap<Integer, String> map = new TreeMap<Integer, String>();
+			map.put(1, "I");
+			map.put(4, "IV");
+			map.put(5, "V");
+			map.put(9, "IX");
+			map.put(10, "X");
+			map.put(40, "XL");
+	        map.put(50, "L");
+	        map.put(90, "XC");
+	        map.put(100, "C");
+	        map.put(400, "CD");
+	        map.put(500, "D");
+	        map.put(900, "CM");
+	        map.put(1000, "M");
+	        
+	        int part = map.floorKey(arab);
+	        if (part == arab)
+	        	return map.get(part);
+	        else
+	        	return map.get(part) + convertToRoman(arab - part);
+		}
+	}
 }
 
 
