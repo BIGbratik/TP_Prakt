@@ -2,6 +2,7 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+
 public class Prat6_6 
 {
 	public static void main(String[] args)
@@ -50,10 +51,40 @@ public class Prat6_6
 					
 				//Практическое задание 6.3
 				case 3:
+					String color;
+					in.nextLine();
+					System.out.print("Введите строку со значениями RGB(A)");
+					color=in.nextLine();
+					validColor(color);
 					break;
 					
 				//Практическое задание 6.4
 				case 4:
+					int k;
+					System.out.print("Что вы хотите передать? (1 - просто строку URL; 2 - строку URL и массив удаляемых) - ");
+					k=in.nextInt();
+					in.nextLine();
+					switch(k)
+					{
+						case 1:
+							String URLa;
+							System.out.print("Введите URL-строку - ");
+							URLa=in.nextLine();
+							stripUrlParams(URLa);
+							break;
+						case 2:
+							String URLb;
+							System.out.print("Введите URL-строку - ");
+							URLb=in.nextLine();
+							String del;
+							System.out.print("Введите значения параметров для удаления через пробел - ");
+							del=in.nextLine();
+							stripUrlParams(URLb,del);
+							break;
+						default:
+							System.out.println("Введённого номера варианта действий не существует!!!");
+							break;
+					}
 					break;
 					
 				//Практическое задание 6.5
@@ -143,6 +174,193 @@ public class Prat6_6
 			str = str.substring(0, index) + str.substring(index).replaceFirst(word, translateWord(word));
 		}
 		System.out.println(str);
+	}
+	
+	//Метод определяющий валидность введённого значения RGB
+	public static void validColor(String color)
+	{
+		color=color.toLowerCase();
+		boolean isColor=true;
+		if (color.charAt(color.length()-1)!=')')
+			isColor=false;
+		else
+		{
+			if (color.substring(0,4).equals("rgb("))
+			{
+				color=color.substring(4,color.length()-1);
+				String mas[]=color.split(",");
+				if (mas.length==3)
+				{
+					for (int i=0;i<3;i++)
+					{
+						int num;
+						try
+						{
+							num=Integer.parseInt(mas[i]);
+							if ((num<0)||(num>255))
+							{
+								isColor=false;
+								break;
+							}
+						}
+						catch (Exception ex)
+						{
+							isColor=false;
+						}
+					}
+				}
+				else
+					isColor=false;
+			}
+			else if (color.substring(0,5).equals("rgba("))
+			{
+				color=color.substring(5,color.length()-1);
+				String mas[]=color.split(",");
+				if (mas.length==4)
+				{
+					for (int i=0;i<3;i++)
+					{
+						int num;
+						try
+						{
+							num=Integer.parseInt(mas[i]);
+							if ((num<0)||(num>255))
+							{
+								isColor=false;
+								break;
+							}
+						}
+						catch (Exception ex)
+						{
+							isColor=false;
+						}
+					}
+					try
+					{
+						if ((Double.parseDouble(mas[3])<0)||(Double.parseDouble(mas[3])>1))
+							isColor=false;
+					}
+					catch(Exception ex)
+					{
+						isColor=false;
+					}
+				}
+				else
+					isColor=false;
+			}
+			else
+				isColor=false;
+		}
+		System.out.println(isColor);
+	}
+	
+	//Метод удаляющий повторяющиеся параметры из URL строки
+	public static void stripUrlParams (String str)
+	{
+		int questionMarkIndex = str.indexOf("?");
+		if (questionMarkIndex != -1)
+		{
+			String[] params = str.substring(questionMarkIndex + 1).split("&");
+			String result = str.substring(0, questionMarkIndex);
+			String paramsResult = "";
+			for (int i = 0; i < params.length; i++)
+			{
+				String paramName = params[i].substring(0, params[i].indexOf("="));
+				String paramValue = params[i].substring(params[i].indexOf("=") + 1);
+				boolean foundEarlier = false;
+				for (int j = 0; j < i; j++)
+				{
+					String earlierParamName = params[j].substring(0, params[j].indexOf("="));
+					if(paramName.contentEquals(earlierParamName))
+					{
+						foundEarlier = true;
+						break;
+					}
+				}
+				if (foundEarlier) continue;
+				for (int j = i + 1; j < params.length; j++)
+				{
+					String laterParamName = params[j].substring(0, params[j].indexOf("="));
+					if(paramName.contentEquals(laterParamName))
+					{
+						paramValue = params[j].substring(params[j].indexOf("=") + 1);
+					}
+				}
+				
+				if (paramsResult.length() > 0) paramsResult += "&";
+				paramsResult += paramName + "=" + paramValue;
+			}
+			if (paramsResult.length() > 0)
+			{
+				result += "?" + paramsResult;
+			}
+			System.out.println(result);
+		}
+		else
+		{
+			System.out.println(str);
+		}
+	}
+
+	//Метод удаляющий повторяющиеся и указанные в массиве параметры из URL строки
+	public static void stripUrlParams(String str, String paramsToStrip)
+	{
+		String[]mas=paramsToStrip.split(" ");
+		int questionMarkIndex = str.indexOf("?");
+		if (questionMarkIndex != -1)
+		{
+			String[] params = str.substring(questionMarkIndex + 1).split("&");
+			String result = str.substring(0, questionMarkIndex);
+			String paramsResult = "";
+			for (int i = 0; i < params.length; i++)
+			{
+				String paramName = params[i].substring(0, params[i].indexOf("="));
+				String paramValue = params[i].substring(params[i].indexOf("=") + 1);
+				boolean foundEarlier = false;
+				for (int j = 0; j < i; j++)
+				{
+					String earlierParamName = params[j].substring(0, params[j].indexOf("="));
+					if(paramName.contentEquals(earlierParamName))
+					{
+						foundEarlier = true;
+						break;
+					}
+				}
+				if (foundEarlier) continue;
+				for (int j = i + 1; j < params.length; j++)
+				{
+					String laterParamName = params[j].substring(0, params[j].indexOf("="));
+					if(paramName.contentEquals(laterParamName))
+					{
+						paramValue = params[j].substring(params[j].indexOf("=") + 1);
+					}
+				}
+				boolean foundInParamsToStrip = false;
+				for (int j = 0; j < mas.length; j++)
+				{
+					if (mas[j].contentEquals(paramName))
+					{
+						foundInParamsToStrip = true;
+						break;
+					}
+				}
+				if (!foundInParamsToStrip)
+				{
+					if (paramsResult.length() > 0) paramsResult += "&";
+					paramsResult += paramName + "=" + paramValue;
+				}
+			}
+			
+			if (paramsResult.length() > 0)
+			{
+				result += "?" + paramsResult;
+			}
+			System.out.println(result);
+		}
+		else
+		{
+			System.out.println(str);
+		}
 	}
 }
 
